@@ -1,0 +1,41 @@
+{
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "no-param-reassign": ["error", { "props": false }],
+    "no-underscore-dangle": 0,
+    "linebreak-style": 0,
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "ignore",
+        "objects": "ignore",
+        "imports": "ignore",
+        "exports": "ignore",
+        "functions": "ignore"
+      }
+    ],
+    "arrow-parens": ["error", "always"],
+    "prefer-arrow-callback": 0,
+    "space-before-function-paren": 0,
+    "func-names": 0,
+    "max-params": ["error", 6],
+    "max-depth": ["error", 4],
+    "max-len": ["error", {
+      "code": 100,
+      "tabWidth": 2,
+      "ignoreComments": true,
+      "ignoreUrls": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreRegExpLiterals": true
+    }],
+    "max-lines": ["error", 4000],
+    "no-prototype-builtins": 0
+  },
+  "parserOptions": { "ecmaVersion": 6 },
+  "plugins": ["node"],
+  "extends": ["eslint:recommended", "plugin:node/recommended", "airbnb"]
+}

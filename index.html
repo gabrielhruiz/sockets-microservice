@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: 0.5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+    </style>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+      $(function () {
+        var chat = io.connect('https://localhost:4000/user?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZTY2MGU2OTkzNzdmMDMxOGM1OTZkMGYiLCJwZXJtaXNzaW9ucyI6W3sicm9sZSI6WyI1ZTVlOGEzNjAyZWFiYTU3NTc3NDA1YjMiLCI1ZTVlOGEzNjAyZWFiYTU3NTc3NDA1YWYiLCI1ZTVlOGEzNjAyZWFiYTU3NTc3NDA1YjAiLCI1ZTVlOGEzNjAyZWFiYTU3NTc3NDA1YjIiXSwiX2lkIjoiNWU1ZThhMzYwMmVhYmE1NzU3NzQwNWI1IiwibmFtZSI6IlZpZXcgQ29udGVudCIsImNyZWF0ZWRBdCI6IjIwMjAtMDMtMDNUMTY6NDc6NTAuMzY2WiIsInVwZGF0ZWRBdCI6IjIwMjAtMDMtMDNUMTY6NDc6NTAuMzY2WiIsIl9fdiI6MH0seyJyb2xlIjpbIjVlNWU4YTM2MDJlYWJhNTc1Nzc0MDViMiIsIjVlNWU4YTM2MDJlYWJhNTc1Nzc0MDViMyJdLCJfaWQiOiI1ZTVlOGEzNjAyZWFiYTU3NTc3NDA1YjgiLCJuYW1lIjoiUmV2aWV3IElkZWEiLCJjcmVhdGVkQXQiOiIyMDIwLTAzLTAzVDE2OjQ3OjUwLjM2NloiLCJ1cGRhdGVkQXQiOiIyMDIwLTAzLTAzVDE2OjQ3OjUwLjM2NloiLCJfX3YiOjB9LHsicm9sZSI6WyI1ZTVlOGEzNjAyZWFiYTU3NTc3NDA1YjMiLCI1ZTVlOGEzNjAyZWFiYTU3NTc3NDA1YWYiLCI1ZTVlOGEzNjAyZWFiYTU3NTc3NDA1YjIiXSwiX2lkIjoiNWU1ZThhMzYwMmVhYmE1NzU3NzQwNWI2IiwibmFtZSI6IkNyZWF0ZSBDb250ZW50IiwiY3JlYXRlZEF0IjoiMjAyMC0wMy0wM1QxNjo0Nzo1MC4zNjZaIiwidXBkYXRlZEF0IjoiMjAyMC0wMy0wM1QxNjo0Nzo1MC4zNjZaIiwiX192IjowfSx7InJvbGUiOlsiNWU1ZThhMzYwMmVhYmE1NzU3NzQwNWIyIiwiNWU1ZThhMzYwMmVhYmE1NzU3NzQwNWIzIiwiNWU1ZThhMzYwMmVhYmE1NzU3NzQwNWFmIl0sIl9pZCI6IjVlNWU4YTM2MDJlYWJhNTc1Nzc0MDViNyIsIm5hbWUiOiJFZGl0IENvbnRlbnQiLCJjcmVhdGVkQXQiOiIyMDIwLTAzLTAzVDE2OjQ3OjUwLjM2NloiLCJ1cGRhdGVkQXQiOiIyMDIwLTAzLTAzVDE2OjQ3OjUwLjM2NloiLCJfX3YiOjB9LHsicm9sZSI6WyI1ZTVlOGEzNjAyZWFiYTU3NTc3NDA1YjMiLCI1ZTVlOGEzNjAyZWFiYTU3NTc3NDA1YjIiXSwiX2lkIjoiNWU1ZThhMzYwMmVhYmE1NzU3NzQwNWI0IiwibmFtZSI6IkRlbGV0ZSBDb250ZW50IiwiY3JlYXRlZEF0IjoiMjAyMC0wMy0wM1QxNjo0Nzo1MC4zNjZaIiwidXBkYXRlZEF0IjoiMjAyMC0wMy0wM1QxNjo0Nzo1MC4zNjZaIiwiX192IjowfV0sInJvbGUiOiI1ZTVlOGEzNjAyZWFiYTU3NTc3NDA1YjMiLCJwcm9qZWN0IjoiNWU2NjBlNjk5Mzc3ZjAzMThjNTk2ZDEwIiwiY29tcGFueSI6IjVlNjYwZTY5OTM3N2YwMzE4YzU5NmQxYiIsInNlc3Npb24iOiIxNTkwNTk0NTI1ODQ4LStjUGIwUStwVkFYZ2hyUE4iLCJpYXQiOjE1OTA2NTk3NDZ9.mIegMkuOsmce-XkaSibStSmG1qjUnwpgSMOVtgnksN0')
+        var socket = io();
+        $('form').submit(function(e) {
+          e.preventDefault();
+          chat.emit('message', $('#m').val());
+          $('#m').val('');
+          return false;
+        });
+        chat.on('message', function(msg){
+          $('#messages').append($('<li>').text(msg));
+            console.log(msg);
+        });
+        chat.on('alert', function(msg){
+          $('#messages').append($('<li>').text(msg));
+        });
+      });
+    </script>
+
+  </body>
+</html>
