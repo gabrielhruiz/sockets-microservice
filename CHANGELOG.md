@@ -17,3 +17,5 @@ Each version should:
 ### Added
 
 - Ping to user
+- Update SocketIO libraries
+- Resolve CORs problems on http deployments
