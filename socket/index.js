@@ -1,11 +1,11 @@
 const socketIo = require('socket.io');
 
-const env = require('../config/environment')
+const env = require('../config/environment');
 const { loadUserSockets } = require('./namespaces/user');
 
 const sockets = {};
 
-const init = (server) => { 
+const init = (server) => {
   const httpConfig = {
     cors: { origin: '*' }
   };

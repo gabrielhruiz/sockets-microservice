@@ -1,9 +1,10 @@
 const fs = require('fs');
 const https = require('https');
-const http = require("http");
-const cors = require('cors')
-const env = require('./config/environment')
+const http = require('http');
+const cors = require('cors');
+const env = require('./config/environment');
 const socket = require('./socket');
+const { job } = require('./cronjob/aircraftPositions');
 
 const isAnHttpDeployment = env.PROTOCOL === 'HTTP';
 
@@ -37,8 +38,8 @@ const httpOptions = {
   }
 };
 
-const server = isAnHttpDeployment 
-  ? http.createServer(httpOptions, app) 
+const server = isAnHttpDeployment
+  ? http.createServer(httpOptions, app)
   : https.createServer(httpsOptions, app);
 
 /**
@@ -49,9 +50,13 @@ socket.init(server);
 /**
  * STRAT SERVER
  */
-// server.listen(4000);
 const port = 4000;
 const host = 'localhost';
 server.listen(port, host, () => {
-    console.log(`Server is running on http://${host}:${port}`);
+  console.log(`Server is running on http://${host}:${port}`);
 });
+
+/**
+ * Start cronjobs
+ */
+job.start();

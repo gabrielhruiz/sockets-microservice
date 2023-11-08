@@ -10,7 +10,7 @@ const onDisconnect = (socket) => {
 };
 
 const sendMessage = (socket, msg) => {
-  logger.info(`Message to ${socket.payload.user}: ${msg}`);
+  //logger.info(`Message to ${socket.payload.user}: ${msg}`);
   socket.emit('message', msg);
 };
 
@@ -26,7 +26,8 @@ const onConnection = (socket) => {
 };
 
 exports.loadUserSockets = (io) => {
-  const userConn = io.of('/user').use(jwtAuth);
+  const userConn = io.of('/user');
+  userConn.use(jwtAuth);
   userConn.on('connection', (socket) => onConnection(socket));
   return userConn;
 };

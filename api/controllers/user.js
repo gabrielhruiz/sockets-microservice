@@ -1,6 +1,6 @@
 const express = require('express');
 
-const sockets = require('./../../socket');
+const sockets = require('../../socket');
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.get('/:userId/ping', (req, res) => {
     const socketConnections = user.sockets.values();
     const values = Array.from(socketConnections);
     const connections = values.reduce((group, item) => {
-      if (item.payload.user == userId) {
+      if (item.payload.user === userId) {
         group.push(item.payload);
       }
       return group;
