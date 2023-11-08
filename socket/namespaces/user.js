@@ -10,7 +10,7 @@ const onDisconnect = (socket) => {
 };
 
 const sendMessage = (socket, msg) => {
-  //logger.info(`Message to ${socket.payload.user}: ${msg}`);
+  logger.info(`Message to ${socket.payload.user}: ${msg}`);
   socket.emit('message', msg);
 };
 
